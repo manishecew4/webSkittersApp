@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "194927687384",
+    "project_id": "webskitters-f2aef",
+    "storage_bucket": "webskitters-f2aef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194927687384:android:a5a2334274d48ca75ec9ad",
+        "android_client_info": {
+          "package_name": "com.ble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194927687384-696dt3aqpt8akt5jgo0h4uif6ngr696l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOU2ScVrSXBgjimPOlJFrAovUhhTW3ctM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194927687384-696dt3aqpt8akt5jgo0h4uif6ngr696l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
