@@ -15,12 +15,12 @@ const Header = () => {
     const handleSignout = () => {
         auth()
             .signOut()
-            .then(() => { navigation.navigate('Login') });
+            .then(() => { navigation.navigate("Login") });
     }
 
     return (
         <View style={styles.header}>
-            <Text>email</Text>
+            <Text></Text>
             <TouchableOpacity onPress={handleSignout}><Icon name="power-off" size={25}/></TouchableOpacity>
 
         </View>
@@ -31,7 +31,7 @@ export default Header
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: '#B2C8DF',
+        backgroundColor: '#664fa494',
         paddingVertical: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',

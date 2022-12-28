@@ -5,9 +5,11 @@ import { Button, TextInput, Text } from 'react-native-paper';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useDispatch } from 'react-redux';
 import { addData } from '../action/index';
+import auth from '@react-native-firebase/auth';
 
 const Products = () => {
 
+    const [isUserLoggedin, setIsUserLoggedin] = useState(false);
     const [filePath, setFilePath] = useState({});
     const [fileName, setFileName] = useState("Choose File");
     const [state, setState] = useState({
@@ -15,6 +17,23 @@ const Products = () => {
         price: "",
         offerPrice: ""
     });
+
+    useEffect(() => {
+        console.log("User Status", isUserLoggedin);
+    })
+
+
+    auth().onAuthStateChanged(user => {
+        if (user) {
+            setIsUserLoggedin(true)
+        }
+    });
+
+    const navigation = useNavigation();
+    if (!isUserLoggedin) {
+        console.log(isUserLoggedin);
+        navigation.navigate("Login")
+    }
 
     const dispatch = useDispatch();
 
@@ -25,7 +44,11 @@ const Products = () => {
         })
     }
 
+    const user = auth().currentUser;
 
+    if (user) {
+        console.log('User email: ', user.email);
+    }
 
 
     const handleSave = () => {
@@ -35,12 +58,6 @@ const Products = () => {
         console.log("price", price);
         console.log("offerPrice", offerPrice);
         console.log("fileName", fileName);
-
-
-
-
-        // dispatch(addData(product));
-
 
         if (name && price && offerPrice && fileName) {
 
@@ -116,6 +133,7 @@ const Products = () => {
             <TextInput
                 label="Product Price"
                 style={styles.inputField}
+                keyboardType='numeric'
                 mode="outlined"
                 value={state.price}
                 onChangeText={text => handleChange(text, "price")}
@@ -123,6 +141,7 @@ const Products = () => {
             <TextInput
                 label="Offer Price"
                 style={styles.inputField}
+                keyboardType='numeric'
                 mode="outlined"
                 value={state.offerPrice}
                 onChangeText={text => handleChange(text, "offerPrice")}

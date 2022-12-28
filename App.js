@@ -9,6 +9,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { Provider } from 'react-redux'
 import store from './store'
+import Header from './components/Header'
 
 const App = () => {
 
@@ -25,16 +26,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {!isUserLoggedin ?
-            (<Stack.Screen name="Login" component={Login} />)
-            : null
-          }
-          {!isUserLoggedin ?
-            (<Stack.Screen name="Signup" component={Signup} />)
-            : null
-          }
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="BottomTab">
           <Stack.Screen name="BottomTab" component={BottomTab} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Signup" component={Signup} />
+          <Stack.Screen name="Header" component={Header} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

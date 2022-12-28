@@ -3,12 +3,15 @@ import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { Button, TextInput, Text } from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 
 const Login = () => {
 
     const navigation = useNavigation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
+    const [loader, setLoader] = useState(false)
+
 
     const handleLogin = async () => {
         try {
@@ -18,11 +21,9 @@ const Login = () => {
                 const isUserLogin = await auth().signInWithEmailAndPassword(
                     email, password
                 );
-                navigation.navigate("Home", {
-                    email: isUserLogin.user.email,
-                    uid: isUserLogin.user.uid
-                })
-            }else{
+                setLoader(true)
+                navigation.navigate('BottomTab', { screen: 'Home' });
+            } else {
                 alert("Please enter Email & Password")
             }
 
@@ -34,6 +35,8 @@ const Login = () => {
 
     return (
         <View style={styles.container}>
+            {loader ? <ActivityIndicator animating={true} style={styles.loader} color={MD2Colors.deepPurple800} /> : null}
+
             <View style={{ width: '80%', marginBottom: 20 }}>
                 <Text variant="displaySmall">Login</Text>
             </View>
@@ -86,5 +89,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 10,
         color: 'blue'
+    },
+    loader: {
+        position: 'absolute',
+        zIndex: 999,
+        backgroundColor: '#0000008a',
+        height: '100%',
+        width: '100%'
     }
 })
